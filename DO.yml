@@ -1,7 +1,16 @@
 ---
 - hosts: local
   tasks:
-  - digital_ocean:
+  - name: Add SSH key to DO account
+    digital_ocean:
+    state: present
+    command: ssh
+    name: webinar
+    ssh_pub_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtC+SAkuFk+jyiwYtaRFHR8Oc3nL7P6a7D/bLfSpxS63cIHFefCkcr1JgMg5PwcSms2hWm832pDOaL1W0EtnB6JcUj5myQpUKdGf9/mmNoGTVn+g16pthlozjH8G2m/xyfDjtNZ+oNb5pkbdkD8937s2bM/9pl3cSSv8OzCY8Ut7UGhDfh+oXNjvfh1zc7Dm3gzVRHlJaVWeVnUl/x8IQCQBRMrqobQ7etJcinPB8dn6qoQHSbGVHOvBlSfr86PFa6HlEMeX3uAorEJkW/3t7+0K4rFwQRTP3XyucCssx8H4+kiLn4E7gDfCQU1R9qrgSWHdO0wVnzEsKTjeb5/MQb root@devopsnexus.com'
+    api_token: "{{ DO_API_TOKEN }}"
+
+  - name: Creating Database Droplet
+    digital_ocean:
       state: present
       command: droplet
       name: database
@@ -15,7 +24,8 @@
   - debug:
       msg: "Database machine's IP is {{ db_droplet.droplet.ip_address }}"
 
-  - digital_ocean:
+  - name: Creating App Droplet
+    digital_ocean:
       state: present
       command: droplet
       name: app

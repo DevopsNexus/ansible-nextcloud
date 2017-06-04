@@ -19,7 +19,7 @@
   - restart httpd
 
 - name: set the nextcloud config
-  copy:
+  template:
     src: autoconfig.php
     dest: /var/www/html/nextcloud/config/autoconfig.php
   notify:
