@@ -34,5 +34,5 @@
     name: oc_nextadmin
     password: "{{ mysql_nextcloud_password }}" 
     host: "%" 
-    priv: '*.*:ALL'
+    priv: 'nextcloud.*:ALL'
     state: present
