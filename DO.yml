@@ -19,6 +19,7 @@
       region_id: blr1
       image_id: centos-7-0-x64
       wait_timeout: 500
+      ssh_key_ids: 7d:b1:a1:4c:d0:f2:61:d5:a2:de:a3:34:93:3e:38:a2
     register: db_droplet
 
   - debug:
@@ -34,6 +35,7 @@
       region_id: blr1
       image_id: centos-7-0-x64
       wait_timeout: 500
+      ssh_key_ids: 7d:b1:a1:4c:d0:f2:61:d5:a2:de:a3:34:93:3e:38:a2
     register: app_droplet
 
   - debug:
