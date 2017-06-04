@@ -1,0 +1,38 @@
+---
+- name: install mysql server
+  yum:
+    name: mariadb-server
+
+- name: start mysql server
+  systemd:
+    name: mariadb
+    state: started
+
+- name: install python mysql for ansible
+  yum:
+    name: MySQL-python
+
+- name: set root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host_all: yes
+
+- name: set .my.cnf
+  template: 
+    src: my.cnf.j2
+    dest: /root/.my.cnf
+    mode: 0400
+
+- name: Create databases
+  mysql_db: 
+    name: nextcloud
+    state: present
+
+- name: Add nextcloud user
+  mysql_user: 
+    name: oc_nextadmin
+    password: "{{ mysql_nextcloud_password }}" 
+    host: "%" 
+    priv: '*.*:ALL'
+    state: present

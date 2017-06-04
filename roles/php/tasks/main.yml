@@ -1,0 +1,23 @@
+---
+- name: install EPEL and Webtatic PHP repo
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    - https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+- name: install PHP and libs
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - php70w
+    - php70w-gd
+    - php70w-xml
+    - php70w-mysqlnd
+    - php70w-mbstring
+    - php70w-process
+    - php70w-mcrypt
+    - php70w-pdo
+

@@ -1,0 +1,32 @@
+---
+- name: install additional tools
+  yum: 
+    name: bzip2 
+    state: installed
+
+- name: get the nextcloud tar
+  get_url: 
+    url: https://download.nextcloud.com/server/releases/nextcloud-12.0.0.tar.bz2 
+    dest: /var/www/html
+
+- name: exract the tar
+  unarchive: 
+    src: /var/www/html/nextcloud-12.0.0.tar.bz2 
+    dest: /var/www/html 
+    copy: no 
+    owner: apache
+  notify:
+  - restart httpd
+
+- name: set the nextcloud config
+  copy:
+    src: autoconfig.php
+    dest: /var/www/html/nextcloud/config/autoconfig.php
+  notify:
+  - restart httpd
+
+- name: set the permission
+  file:
+    path: /var/www/html/nextcloud
+    owner: apache
+    state: directory

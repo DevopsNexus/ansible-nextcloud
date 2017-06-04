@@ -1,0 +1,8 @@
+[app]
+<IP here> http_port=80 domain=nextcloud.example.com
+
+[database]
+<IP here> mysql_root_password=chang3m3 mysql_nextcloud_password=nextpa55wd
+
+[local]
+127.0.0.1 DO_API_TOKEN=<DO_API_TOKEN_HERE>

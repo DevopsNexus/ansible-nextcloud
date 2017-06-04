@@ -1,0 +1,30 @@
+---
+- hosts: local
+  tasks:
+  - digital_ocean:
+      state: present
+      command: droplet
+      name: database
+      api_token: "{{ DO_API_TOKEN }}"
+      size_id: 512mb
+      region_id: blr1
+      image_id: centos-7-0-x64
+      wait_timeout: 500
+    register: db_droplet
+
+  - debug:
+      msg: "Database machine's IP is {{ db_droplet.droplet.ip_address }}"
+
+  - digital_ocean:
+      state: present
+      command: droplet
+      name: app
+      api_token: "{{ DO_API_TOKEN }}"
+      size_id: 512mb
+      region_id: blr1
+      image_id: centos-7-0-x64
+      wait_timeout: 500
+    register: app_droplet
+
+  - debug:
+      msg: "App machines's IP is {{ app_droplet.droplet.ip_address }}"

@@ -1,0 +1,11 @@
+<VirtualHost *:{{ http_port }} >
+        ServerAdmin aditya@adityapatawari.com
+        ServerName {{ domain }}
+        Options Indexes MultiViews FollowSymLinks
+        DirectoryIndex index.php
+        DocumentRoot /var/www/html/nextcloud
+        <Directory /var/www/html/nextcloud>
+        Options FollowSymLinks
+        AllowOverride All
+    </Directory>
+</VirtualHost>
